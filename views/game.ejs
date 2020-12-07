@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consensus İntelektual mərkəzi</title>
+<!-- STYLE.CSS -->
+<link rel="stylesheet" href="style.css">
+<!-- NEWS.CSS -->
+<link rel="stylesheet" href="other.css">
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css?family=Comic+Neue&display=swap" rel="stylesheet">
+<!-- favicon -->
+<link rel="shortcut icon" href="img/logomini.jpg" type="image/x-icon">
+</head>
+<body>
+<div class="container">
+<!-- NAVBAR -->
+<nav class="all-nav scroll">
+    <div class="logo"><a href="#"><img src="./img/logo.jpg" alt=""></a></div>
+    <small class="volunteer">Könüllü Ol</small>
+    <small class="user"></small>
+</nav>
+<!-- GAMES -->
+<section id="game-list">
+    <div class="game">
+        <p class="game-name xamsa">Xəmsə</p>
+        <div class="level-of-xamsa level-of-questions">
+            <p class="xamsa-easy">Məktəbli</p>
+            <p class="xamsa-middle">Tələbə</p>
+            <p class="xamsa-difficult">Digər</p>
+        </div>
+    </div>            
+    <div class="game">
+        <p class="game-name brain">Breyn Ring</p>
+        <div class="level-of-brain level-of-questions">
+            <p class="brain-easy">Məktəbli</p>
+            <p class="brain-middle">Tələbə</p>
+            <p class="brain-difficult">Digər</p>
+        </div>
+    </div>
+    <div class="game">
+        <p class="game-name what">Nə? Harada ? Nə zaman ?</p>
+        <div class="level-of-what level-of-questions">
+            <p class="what-easy">Məktəbli</p>
+            <p class="what-middle">Tələbə</p>
+            <p class="what-difficult">Digər</p>
+        </div>
+    </div>
+    <div class="game">
+        <p class="game-name clever">Əlaçı</p>
+        <div class="level-of-clever level-of-questions">
+            <p class="clever-easy">Məktəbli</p>
+            <p class="clever-middle">Tələbə</p>
+            <p class="clever-difficult">Digər</p>
+        </div>
+    </div>
+</section>
+<section class="questions-container">
+    <table class="result-list">
+        <tr>
+            <th>№</th>
+            <th>Sual</th>
+            <th>Cavab</th>
+            <th>Nəticə</th>
+        </tr>
+    </table>
+    <h1 class="questions-head">Suallar:</h1>
+    <!-- come from database -->
+</section>
+<!-- CONTACT -->
+<footer id="contact">
+    <div class="container-head">
+    <h1 class="heading"><img src="img/e-aq.png" alt="" class="letters">Əlaqə</h1>
+    <div class="title-underline"></div>
+    <div class="contact-mail">
+        <div class="contact-info">
+            <div class="contact-info-icon"><i class="fas fa-map-marker-alt contact-icons"></i><small class="contact-knowledge">Azərbaycan, Bakı</small></div>
+            <div class="contact-info-icon"><i class="fas fa-phone-square-alt contact-icons"></i><small class="contact-knowledge">051 422 49 00</small></div>
+            <div class="contact-info-icon"><i class="fas fa-envelope contact-icons"></i><small class="contact-knowledge">info@consensuz.az</small></div>
+            <div class="footer-icons">
+                <a href="https://www.facebook.com/iiok.az" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/consensus.az/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/channel/UCvy_fsVkhGQLfqqtCkhbd6Q?view_as=subscriber" target="_blank"><i class="fab fa-youtube-square"></i></a>
+            </div>
+            <p class="copyright">&copy; Bütün hüquqlar qorunur</div>
+        <div class="contact-inputs">
+            <input type="text" name="" id="your-name" placeholder="Ad:">
+            <input type="text" name="" id="email" placeholder="Soyad:">
+            <input type="text" name="" id="your-sms" class="contact-textarea" placeholder="Mesaj:">
+            <!-- <textarea name="" id="your-sms" class="contact-textarea" placeholder="Mesaj:"></textarea> -->
+            <button type="submit" class="send-mail-btn"><i class="far fa-paper-plane"></i>Göndər</button>
+        </div>
+    </div>
+    <div class="message-box"><p>Gözləyin...</p></div>
+</div>
+</footer>
+</div>
+<!-- Jquery -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $('.user').text(`${sessionStorage.getItem('user')}`).text();
+</script>
+<!-- script.js -->
+<script src="script.js"></script>
+<!-- fontawesome -->
+<script src="all.min.js"></script>
+<!-- admin script -->
+<script src="admin/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Josefin Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+:root{
+    /* --mainColor:#F4DE08; */
+    --mainColor:rgb(241, 218, 3);
+    --aciqMain:rgb(245, 252, 210);
+    --spacing:0.3px;
+}
+/* ALL TAGS */
+p{
+    line-height: 1.2;
+    letter-spacing: var(--spacing);
+}
+ul{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+.all-nav{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgba(241, 218, 3, 0.3);
+    padding: 10px;
+    width: 100%;
+    position: fixed;
+    background-color: rgba(241, 218, 3, 0.9);
+    padding: 11px;
+    z-index: 3;
+    top: -5px;
+}
+#news-page{
+    margin: 90px 0;
+}
+.news-more{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 50px auto 0 auto;
+    max-width: 1170px;
+}
+.news-more-img{
+    max-width: 500px;
+}
+.news-more-img img{
+    width: 100%;
+}
+.news-more-container{
+    max-width: 600px;
+}
+.news-more-container-head{
+    margin-top: 10px;
+}
+.news-more-container-text{
+    margin:20px 0;
+}
+.news-more-container-date{
+    font-style: italic;
+    font-weight: bold;
+    font-size: 17px;
+}
+@media screen and (max-width:1100px){
+    .news-more{
+        justify-content: center;
+    }
+    .news-more-container{
+        text-align: center;
+    }
+}
+/* GAMES */
+#game-list{
+    margin: 100px 0 50px 0;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.game{
+    padding: 10px 15px;
+    background-color: black;
+    color: var(--aciqMain);
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    position: relative;
+}
+.game:hover{
+    color: white;
+}
+.level-of-questions{
+    background: var(--mainColor);
+    width: 100px;
+    /* padding: 10px 5px; */
+    box-shadow: 7px 7px 8px -6px rgba(0,0,0,0.67);
+    position: relative;
+    border-radius: 10px;
+    padding: 10px 0;
+    position: absolute;
+    z-index: 3;
+    top: 48px;
+    display: none;
+}
+.level-of-questions::before{
+    content: " ";
+    display: block;
+    background: var(--mainColor);
+    width: 15px;
+    height: 15px;
+    box-shadow: 7px 7px 8px -6px rgba(0,0,0,0.67);
+    transform: rotate(45deg);
+    position: absolute;
+    top: -5.5px;
+    left: 15px;
+    z-index: -3;
+}
+.level-of-questions p{
+    padding: 10px 0 10px 10px;
+    font-weight: bold;
+}
+.level-of-questions p:nth-of-type(2){
+    border-top: 2px solid #eee;
+    border-bottom: 2px solid #eee;
+}
+.level-of-questions p:hover{
+    background-color: #eee;
+    color: black;
+}
+/* QUESTION */
+.questions-container{
+    padding: 30px 50px;
+    background-color: var(--aciqMain);
+}
+.questions-head{
+    font-size: 35px;
+}
+.name-of-game{
+    color: green;
+    font-weight: bold;
+}
+.question-contex{
+    margin-bottom: 35px;
+    position: relative;
+}
+.question{
+    margin-bottom: 13px;
+}
+.answer{
+    padding: 3px;
+    height: 60px;
+    width: 200px;
+}
+.question span{
+    font-weight: bold;
+    font-size: 18px;
+    color: blue;
+}
+.level-name{
+    margin-bottom: 30px;
+    color: red;
+    text-transform: capitalize;
+}
+.confirm-answer{
+    border: none;
+    background: transparent;
+    border-radius: 3px;
+    box-shadow: 0px 0px 16px -6px rgba(0,0,0,1);
+    padding: 7px 11px 0 11px;
+    margin: 0 15px 0 10px;
+    font-weight: bold;
+}
+.go-another-question{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.go-another-question:hover{
+    color: var(--mainColor);
+}
+/* TIMER */
+.timer{
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    text-decoration: underline;
+}
+/* RESULT LIST */
+.result-list{
+display: none;
+}
+.result-list tr {
+background-color: #fff;
+}
+.result-list th {
+background-color: black;
+color: white;
+padding: 7px 5px
+}
+.result-list td{
+    padding: 7px 5px;
+text-align: center;
+}
+.result-list td:nth-last-child(1){
+color: green;
+font-weight: bold;
+font-size: 20px;
+}
+  

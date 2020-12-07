@@ -1,0 +1,422 @@
+$(document).ready(async function(){
+
+    // ---------------------------MENU---------------------------
+    let dataMenu = await fetch("http://localhost:4000/api/get-menu").then(res => res.json());
+ 
+    if (dataMenu.menu !== "Hech bir malumat tapilmadi") {
+        dataMenu.menu.map(menuData => {
+            $('.nav-menu').append(`<li><a href="${menuData.url}">${menuData.name}</a></li>`);
+        })
+    }
+
+    // ---------------------------PROJECTS---------------------------
+    let dataProject = await fetch("http://localhost:4000/api/get-project").then(res => res.json());
+ 
+    if (dataProject.projects !== "Hech bir malumat tapilmadi") {
+        dataProject.projects.map(projectsData => {
+            if(projectsData.status!==0){
+            $('.projects-container').append(`
+                <div class="project">
+                    <img class="project-img" src="img/${projectsData.img}">
+                    <h1 class="project-name">${projectsData.head}</h1>
+                    <p class="project-date"><span>Tarix:</span> ${projectsData.time}</p>
+                    <p class="project-place"><span>Məkan:</span> ${projectsData.place}</p>
+                    <p class="project-support"><span>Dəstəkçi:</span> ${projectsData.support}</p>
+                    <p class="project-extra-text">${projectsData.hideContex}</p>
+                    <button type="submit" class="more-project">ƏTRAFLI</button>
+                </div>
+            `);
+        }
+        })
+    }
+
+    // ---------------------------ABOUT---------------------------
+    let dataAbout = await fetch("http://localhost:4000/api/get-about").then(res => res.json());
+ 
+    if (dataAbout.about !== "Hech bir malumat tapilmadi") {
+        dataAbout.about.map(aboutData => {
+            if(aboutData.direction==="left" && aboutData.status!==0){
+                $('.about-container').append(`
+                    <div class="about about-left">
+                        <div class="about-contex about-contex-right">
+                            <h3 class="about-head">${aboutData.name}<br>${aboutData.job}</h3>
+                            <p class="about-text">${aboutData.contex}</p>
+                        </div>
+                        <img class="about-img" src="img/${aboutData.img}" alt="">
+                    </div>
+                `);
+            }
+            else if(aboutData.direction==="right" && aboutData.status!==0){
+                $('.about-container').append(`
+                <div class="about about-right">
+                <img class="about-img" src="img/${aboutData.img}" alt="">
+                <div class="about-contex about-contex-left">
+                    <h3 class="about-head">${aboutData.name}<br>${aboutData.job}</h3>
+                    <p class="about-text">${aboutData.contex}</p>
+                </div>
+            </div>
+                `);
+            }
+        })
+    }
+
+    // ---------------------------EVENT---------------------------
+    let dataEvent = await fetch("http://localhost:4000/api/get-event").then(res => res.json());
+ 
+    if (dataEvent.event !== "Hech bir malumat tapilmadi") {
+        dataEvent.event.map(eventData => {
+            if(eventData.status!==0){
+            $('.event-container').append(`
+            <div class="event-card">
+                <div class="event-front"><img class="event-front-img" src="img/${eventData.img}" alt=""></div>
+                <div class="event-back">
+                    <div class="event-card-contex">
+                        <img src="img/logomini.jpg" alt="" class="event-back-img">
+                        <h4 class="event-name">${eventData.head}</h4>
+                        <p class="event-text">${eventData.time}</p>
+                        <p class="event-extra-text">${eventData.contex}</p>
+                        <a class="more-event" href="${eventData.url}">ƏTRAFLI<i class="fas fa-long-arrow-alt-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            `);
+        }
+        })
+    }
+
+    // ---------------------------NEWS---------------------------
+    let dataNews = await fetch("http://localhost:4000/api/get-news").then(res => res.json());
+ 
+    if (dataNews.news !== "Hech bir malumat tapilmadi") {
+        dataNews.news.map(newsData => {
+            if(newsData.direction==="right" && newsData.status!==0){
+            $('.news-container').prepend(`
+            <article class="news-item" data-id="${newsData._id}">
+            <div class="front-text"> 
+            <img src="img/${newsData.img}" alt="" class="news-front-img">           
+            </div>
+            <div class="back-text">
+              <h1 class="back-text-heading">${newsData.date}</h1>
+              <p class="back-text-contex">${newsData.contex}</p>
+              <a href="/news" target="_blank" class="news-button">ƏTRAFLI</a>
+            </div>
+            </article>
+            `);
+            
+            $(".news-page-container").prepend(`
+            <div class="news-more">
+                <div class="news-more-img"><img src="img/${newsData.img}" alt=""></div>
+                <div class="news-more-container">
+                    <h1 class="news-more-container-head">${newsData.head}</h1>
+                    <p class="news-more-container-text">${newsData.hideContex}</p>
+                    <small class="news-more-container-date">${newsData.date}</small>
+                </div>
+            </div>
+            `);
+        }
+        else if(newsData.direction==="left" && newsData.status!==0){
+            $('.news-container').prepend(`
+            <article class="news-item" data-id="${newsData._id}">
+            <div class="front-text"> 
+            <img src="img/${newsData.img}" alt="" class="news-front-img">                
+            </div>
+            <div class="back-text">
+              <h1 class="back-text-heading">${newsData.date}</h1>
+              <p class="back-text-contex">${newsData.contex}</p>
+              <a href="/news" target="_blank" class="news-button">ƏTRAFLI</a>
+            </div>
+            </article>
+            `);
+
+            $(".news-page-container").prepend(`
+            <div class="news-more">
+                <div class="news-more-container">
+                    <h1 class="news-more-container-head">${newsData.head}</h1>
+                    <p class="news-more-container-text">${newsData.hideContex}</p>
+                    <small class="news-more-container-date">${newsData.date}</small>
+                </div>
+                <div class="news-more-img"><img src="img/${newsData.img}" alt=""></div>
+            </div>
+            `);
+        }
+        })
+        $('.news-item:nth-last-child(1)').remove();
+    }
+
+    // -----------------------VOLUNTEER---------------------------
+    let formData={};
+    $(document).on('click','.just-be', async function(){
+    formData.name=$('.volunteer-name').val();
+    formData.surname=$('.volunteer-surname').val();
+    formData.number=$('.volunteer-number').val();
+    formData.email=$('.volunteer-email').val();
+    formData.status=1;
+
+    function checkVolunteer(){
+        if($('.volunteer-name')[0].checkValidity()===true &&
+        $('.volunteer-surname')[0].checkValidity()===true &&
+        $('.volunteer-number')[0].checkValidity()===true &&
+        $('.volunteer-email')[0].checkValidity()===true ){
+            return true;
+        }
+    }
+
+    if(checkVolunteer()){
+    let menu = await fetch("http://localhost:4000/api/add-volunteer", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(res => res.json());
+    formData={};
+    alert('Qeydiyyat uğurla tamamlandı )');
+    }
+    })
+
+    // -----------------------SIGN-IN---------------------------
+    $(document).on('click','.sign-in', async function(){
+    formData.name=$('.sign-in-name').val();
+    formData.date=$('.sign-in-birth').val();
+    formData.number=$('.sign-in-number').val();
+    formData.email=$('.sign-in-email').val();
+    formData.password=$('.sign-in-password').val();
+    formData.repassword=$('.sign-in-repassword').val();
+    formData.status=1;      
+    
+    function checking(){
+        if($('.sign-in-number')[0].checkValidity()===true 
+            && $('.sign-in-name')[0].checkValidity()===true
+            && $('.sign-in-password')[0].checkValidity()===true
+            && $('.sign-in-repassword')[0].checkValidity()===true
+            && $('.sign-in-email')[0].checkValidity()===true){
+                return true;
+        }
+    }
+
+    if(checking()){
+        let menu = await fetch("http://localhost:4000/api/add-sign", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+        })
+        .then(res => res.json());
+        formData={};
+        alert('Qeydiyyat uğurla tamamlandı )');
+    }    
+    })
+
+    $(document).on('click','.log-in',async function(){
+        let dataSign = await fetch("http://localhost:4000/api/get-sign").then(res => res.json());
+        if (dataSign.sign !== "Hech bir malumat tapilmadi") {
+            dataSign.sign.map(signData => {
+                if(signData.email===$('.sign-in-email').val() 
+                && signData.password===$('.log-in-password').val() 
+                && $('.log-in-password')[0].checkValidity()===true
+                && $('.sign-in-email')[0].checkValidity()===true){
+                    if(signData.status!==0){
+                    //    $(this).attr("href", "/game");
+                    console.log(this);
+                    
+                    }
+                    else{
+                        alert('Hesabınız Silinib.');
+                    }
+                }
+            })
+        }
+    })
+    
+    // ---------------------------SEND MAIL---------------------------
+    let sendMail={};
+    $('.send-mail-btn').click(async function(){
+        
+        $('.message-box').show();
+        $('.message-box').addClass('opa-message-box');
+
+        sendMail.subject=$('#your-name').val();
+        sendMail.from=$('#email').val();
+        sendMail.text=$('.contact-textarea').val();
+
+        let mail = await fetch("http://localhost:4000/mail/post-mail", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(sendMail)
+        })
+        .then(res => res.json());   
+        $('.message-box p').remove();
+        $('.message-box').append('<p>Mail Göndərildi!</p>');
+        setTimeout(function(){
+            $('.message-box').removeClass('opa-message-box');
+        }, 1500);
+        
+        sendMail={};
+    })
+
+    // VOLUNTEER FORM
+    $('body').append(`
+    <fieldset class="volunteer-container" >
+    <legend>Hekayəmizin bir parçası ol!</legend>
+    <form>
+        <i class="fas fa-times-circle volunteer-close"></i>
+        <label for="" >Ad</label>
+        <input type="text" class="volunteer-name" minlength="3" required>
+        <label for="" >Soyad</label>
+        <input type="text" class="volunteer-surname" minlength="6" required>
+        <label for="" >Əlaqə nömrəsi</label>
+        <input type="tel" class="volunteer-number" pattern="[0-9]{10}" title="Nömrə düzgün daxil edilməyib." placeholder="0501112233" required>
+        <label for="" >E-mail ünvanı</label>
+        <input type="email" class="volunteer-email" title="Email düzgün daxil edilməyib." required>
+        <button type="submit" class="just-be">Könüllü Ol</button>
+        </form>
+    </fieldset>
+    `);
+
+    // PLAY GAME FORM
+    $(document).on('click','.go-sign-in',function(){
+        $('.log-in-contex').remove();
+        $('.sign-in-container').append(`
+        <form class="sign-in-contex">
+            <i class="fas fa-times-circle sign-in-close"></i>
+            <label for="" >Ad ve Soyad</label>
+            <input type="text" class="sign-in-name" minlength="6" required>
+            <label for="" >Doğum tarixi</label>
+            <input
+                  type="text" 
+                  class="sign-in-birth"
+                  placeholder="01.08.2011"
+                  onfocus="(this.type='date')"
+                  max="${new Date().getFullYear()-6}-12-31"
+                  required
+                >
+            <label for="" >Əlaqə nömrəsi</label>
+            <input type="tel" pattern="[0-9]{10}" title="Nömrə düzgün daxil edilməyib." placeholder="0501112233" class="sign-in-number" required>
+            <label for="" >E-mail ünvanı</label>
+            <input type="email" class="sign-in-email" title="Email düzgün daxil edilməyib." required>
+            <label for="" >Şifrə</label>
+            <input type="password" class="sign-in-password" minlength="8" title="Şifrə minimum 8 simvoldan ibarət olmalıdır." required>
+            <label for="" >Şifrəni təsdiqlə</label>
+            <input type="password" class="sign-in-repassword" required>
+            <p class="go-log-in">Hesabına daxil ol</p>
+            <button type="submit" class="sign-in" >Təsdiqlə</button>
+            </form>
+        `);
+    })
+
+    $(document).on('click','.go-log-in',function(){
+        $('.sign-in-contex').remove();
+        $('.sign-in-container').append(`
+        <form class="log-in-contex">
+        <i class="fas fa-times-circle sign-in-close"></i>
+        <label for="" >E-mail ünvanı</label>
+        <input type="email" class="log-in-email" required>
+        <label for="" >Şifrə</label>
+        <input type="password" class="log-in-password" required>
+        <p class="go-sign-in">Qeydiyyatdan keç</p>
+        <a class="log-in">Təstiqlə</a>
+        </form> 
+        `);
+    })
+
+    // when page scroll add class to navbar
+    $(document).scroll(function(){
+        if($(document).scrollTop()!==0){
+            $('.main-nav').addClass('scroll');
+        }
+        if($(document).scrollTop()===0){
+            $('.main-nav').removeClass('scroll');
+        }
+        // if($('.nav-menu a:target')!=='#about'){
+        //     $('.nav-menu a').removeClass('nav-menu-hover');
+        // }
+    })
+
+    // smooth scroll to menu elements
+    function scroll (link){
+        $('.nav-menu a').removeClass('nav-menu-hover');
+        // $(this).addClass('nav-menu-hover');
+        link.preventDefault();
+        let target=$(this).attr('href');
+        $('html, body').stop().animate({
+            scrollTop:$(target).offset().top
+        },1200)
+    }
+
+    $(document).on('click','.nav-menu a', scroll);
+    $(document).on('click','.banner-btn', scroll);
+    $(document).on('click','.more-event', scroll);
+
+    // show the more information on PROJECT section
+    $('.more-project').click(function(){
+        $(this).siblings('.project-extra-text').toggle(300);
+    })
+
+    // burger menu
+    $('.fa-bars').click(function(){
+        $('.nav-menu').toggle();
+    })
+
+    
+    // NEWS read more
+    $(document).on("click",".news-button",async function(){
+        $('.news-more-info').addClass('news-more-info-show');
+        let id=$(this).parent().parent().attr("data-id");
+
+        dataNewsId = await fetch(`http://localhost:4000/api/get-news/${id}`).then(res => res.json());
+        
+    })
+
+    // close NEWS read more
+    $(document).on("click",".news-more-info-close", async function(){
+        $('.news-more-info').removeClass('news-more-info-show');
+        $('.news-more-info').addClass('news-more-info-hide');
+    })
+
+    // volunteer btn
+    $(".volunteer").click(function(){
+        $('body').css('background-color', "black");
+        $('.volunteer-container').show(200);
+        $('.volunteer-container').addClass("volunteer-container-opa");
+        $(".container").css('opacity', '0.2');
+    })
+
+    $(document).on('click','.volunteer-close', function(){
+        $('body').css('background-color', "white");
+        $('.volunteer-container').hide(100);
+        $('.volunteer-container').removeClass("volunteer-container-opa");
+        $(".container").css('opacity', '1');
+    })
+
+    // PLAY GAME
+    $('.play').click(function(){
+        $('.sign-in-contex').remove();
+        $('.log-in-contex').remove();
+        $('.sign-in-container').append(`
+        <form class="log-in-contex">
+        <i class="fas fa-times-circle sign-in-close"></i>
+        <label for="" >E-mail ünvanı</label>
+        <input type="email" class="log-in-email" required>
+        <label for="" >Şifrə</label>
+        <input type="password" class="log-in-password" required>
+        <p class="go-sign-in">Qeydiyyatdan keç</p>
+        <a class="log-in">Təsdiqlə</a>
+        </form>
+    `);
+        $('body').css('background-color', "black");
+        $('.sign-in-container').show(200);
+        $('.sign-in-container').addClass("sign-in-container-opa");
+        $(".container").css('opacity', '0.2');
+    })
+
+    $(document).on('click','.sign-in-close', function(){
+        $('body').css('background-color', "white");
+        $('.sign-in-container').hide(100);
+        $('.sign-in-container').removeClass("sign-in-container-opa");
+        $(".container").css('opacity', '1');
+    })
+})

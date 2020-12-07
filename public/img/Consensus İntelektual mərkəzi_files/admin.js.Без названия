@@ -1,0 +1,302 @@
+$(document).ready(async function(){
+
+  let formData={};
+
+  // --------------------------VOLUNTEERS-------------------------
+  let dataVolunteer = await fetch("http://localhost:4000/api/get-volunteer").then(res => res.json());
+ 
+    if (dataVolunteer.volunteer !== "Hech bir malumat tapilmadi") {
+      dataVolunteer.volunteer.map(volunteerData => {
+        if(volunteerData.status!==0){
+          $('.volunteer-list').append(`
+          <tr>
+            <td class='volunteer-td' data-id="${volunteerData._id}">${volunteerData.name}</td>
+            <td class='volunteer-td' data-id="${volunteerData._id}">${volunteerData.surname}</td>
+            <td class='volunteer-td' data-id="${volunteerData._id}">${volunteerData.number}</td>
+            <td class='volunteer-td' data-id="${volunteerData._id}">${volunteerData.email}</td>
+          </tr>
+          `)
+        }
+      })
+    }
+
+    $(document).on('click','.volunteer-td',async function(){
+      $('tr').css('background-color','');
+      $(this).parent().css('background-color','grey');
+      let that=this;
+    $('.delete-volunteer').click(async function(){
+      formData.id=$(that).attr('data-id');
+      formData.status=0;
+      
+      let menu = await fetch("http://localhost:4000/api/delete-volunteer", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(res => res.json());
+      $(that).parent().toggle(200);
+      formData={};
+    })
+  })
+
+  // --------------------------GAMERS-------------------------
+  let dataSign = await fetch("http://localhost:4000/api/get-sign").then(res => res.json());
+ 
+    if (dataSign.sign !== "Hech bir malumat tapilmadi") {
+      dataSign.sign.map(signData => {
+        if(signData.status!==0){
+          $('.gamers-list').append(`
+          <tr>
+            <td class='sign-td' data-id="${signData._id}">${signData.name}</td>
+            <td class='sign-td' data-id="${signData._id}">${signData.date}</td>
+            <td class='sign-td' data-id="${signData._id}">${signData.number}</td>
+            <td class='sign-td' data-id="${signData._id}">${signData.email}</td>
+          </tr>
+          `)
+        }
+      })
+    }
+
+    $(document).on('click','.sign-td',async function(){
+      $('tr').css('background-color','');
+      $(this).parent().css('background-color','grey');
+      let that=this;
+    $('.delete-gamers').click(async function(){
+      formData.id=$(that).attr('data-id');
+      formData.status=0;
+      
+      let menu = await fetch("http://localhost:4000/api/delete-sign", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(res => res.json());
+      $(that).parent().toggle(200);
+      formData={};
+    })
+  })
+
+  // ---------------------------PROJECTS---------------------------
+  $('.project-add-btn').click(async function(){
+      
+      formData.head=$('.project-head').val();
+      formData.time=$('.project-when').val();
+      formData.place=$('.project-where').val();
+      formData.support=$('.project-who').val();
+      formData.img=$('.project-picture').val().match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+      formData.hideContex=$('.project-hide-contex').val();
+      formData.status=1;
+    
+      let menu = await fetch("http://localhost:4000/api/add-project", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(res => res.json());
+      formData={};
+      
+  })
+  $('.project-delete-btn').click(async function(){
+    formData.head=$('.project-head').val();
+    formData.status=0;
+
+    let menu = await fetch("http://localhost:4000/api/delete-project", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(res => res.json());
+    
+    formData={};
+  })
+
+  // -----------------------ABOUT---------------------------
+  $('.about-add-left').click(async function(){
+      formData.name=$('.about-name').val();
+      formData.img=$('.about-picture').val().match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+      formData.contex=$('.about-contex').val();
+      formData.job=$('.about-job').val();
+      formData.status=1;
+      formData.direction='left';
+
+      let menu = await fetch("http://localhost:4000/api/add-about", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(formData)
+      })
+      .then(res => res.json());
+      formData={};
+  })
+
+  $('.about-add-right').click(async function(){
+      formData.name=$('.about-name').val();
+      formData.contex=$('.about-contex').val();
+      formData.job=$('.about-job').val();
+      formData.status=1;
+      formData.direction='right';
+
+      let menu = await fetch("http://localhost:4000/api/add-about", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(formData)
+      })
+      .then(res => res.json());
+      
+      formData={};
+  })
+
+  $('.about-delete-btn').click(async function(){
+      formData.name=$('.about-name').val();
+      formData.status=0;
+
+      let menu = await fetch("http://localhost:4000/api/delete-about", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(formData)
+      })
+      .then(res => res.json());
+      alert("Silinme uqurla basha chatdi")
+      formData={};
+  })
+
+  // -----------------------EVENT---------------------------
+  $('.event-add-btn').click(async function(){
+      
+      formData.head=$('.event-head').val();
+      formData.contex=$('.event-contex').val();
+      formData.time=$('.event-time').val();
+      formData.url='#news';
+      formData.img=$('.event-picture').val().match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+      formData.status=1;
+
+      let menu = await fetch("http://localhost:4000/api/add-event", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(formData)
+      })
+      .then(res => res.json());
+      formData={};
+      
+  })
+
+  $('.event-delete-btn').click(async function(){
+    formData.head=$('.event-head').val();
+    formData.status=0;
+
+    let menu = await fetch("http://localhost:4000/api/delete-event", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(res => res.json());
+    
+    formData={};
+  })
+
+  // -----------------------NEWS---------------------------
+  $('.news-add-left').click(async function(){
+      formData.head=$('.news-head').val();
+      formData.contex=$('.news-contex').val();
+      formData.hideContex=$('.news-hide-contex').val();
+      formData.date=$('.news-date').val();
+      formData.img=$('.news-picture').val().match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+      formData.status=1;
+      formData.direction='left';
+
+      let menu = await fetch("http://localhost:4000/api/add-news", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(formData)
+      })
+      .then(res => res.json());
+      formData={};
+  })
+
+  $('.news-add-right').click(async function(){
+      formData.head=$('.news-head').val();
+      formData.contex=$('.news-contex').val();
+      formData.hideContex=$('.news-hide-contex').val();
+      formData.date=$('.news-date').val();
+      formData.img=$('.news-picture').val().match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+      formData.status=1;
+      formData.direction='right';
+
+      let menu = await fetch("http://localhost:4000/api/add-news", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(formData)
+      })
+      .then(res => res.json());
+      
+      formData={};
+  })
+
+  $('.news-delete-btn').click(async function(){
+    formData.head=$('.news-head').val();
+    formData.status=0;
+
+    let menu = await fetch("http://localhost:4000/api/delete-news", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(res => res.json());
+    
+    formData={};
+  })
+
+    // log in page
+    $("#logIn").on("click", async function() {
+        const some=await fetch(`http://localhost:4000/api/take-parol`).then(res=>res.json());  
+
+        if (some.data === $("input[name=logInParol]").val()) {
+          $(this).attr('href','/adminIn');
+          window.location =  $(this).attr('href');
+        } else{
+            $("input[name=logInParol]").addClass('shake');
+            setTimeout(function(){
+                $("input[name=logInParol]").removeClass('shake');
+            },500)
+        } 
+      });
+
+      $(window).keydown(async function(event){
+        if(event.keyCode===13 || event.which===13){
+        const some=await fetch(`http://localhost:4000/api/take-parol`).then(res=>res.json());    
+        if (some.data === $("input[name=logInParol]").val()) {
+          $("#logIn").attr('href','/adminIn');
+          window.location =  $("#logIn").attr('href');
+        } else{
+          $("input[name=logInParol]").addClass('shake');
+          setTimeout(function(){
+            $("input[name=logInParol]").removeClass('shake');
+        },500)
+        } 
+      }
+      })
+
+})

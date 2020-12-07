@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <div class="link-container">
+            <a href="/admin/volunteers" >List of Volunteers</a>
+            <a href="/admin/gamers" >List of Gamers</a>
+            <a href="/admin/xamsa" >Xamsa</a>
+            <a href="/admin/brainRing" >Brain-Ring</a>
+            <a href="/admin/what"  >What?When?Where?</a>
+            <a href="/admin/clever" >Əlaçı</a>
+            <div class="change-password">
+                <p>Parolu dəyiş</p>
+                <div class="parol-box">
+                    <input type="text" class="current-password" placeholder="Current password">
+                    <input type="text" class="new-password" placeholder="New password">
+                    <input type="text" class="reNew-password" placeholder="Rewrite new password">
+                    <button class="change-pass-btn">Change</button>
+                </div>
+            </div>
+        </div>
+        <!-- -----------------------PROJECT-------------------- -->
+        <form action="/" class="project-add admin-container-section">
+            <h1 class="section-title">Layihələr</h1>
+            <label for="">Layihənin Adı</label>
+            <input type="text" class="project-head">
+            <label for="">Layihənin Şəkli</label>
+            <input type="file" class="project-picture">
+            <label for="">Layihənin Keçirilmə Tarixi</label>
+            <input type="text" class="project-when">
+            <label for="">Layihənin Keçirilmə Yeri</label>
+            <input type="text" class="project-where">
+            <label for="">Layihə Dəstəkçisi</label>
+            <input type="text" class="project-who">
+            <label for="">Layihənin Məzmunu</label>
+            <textarea class="project-hide-contex"></textarea>
+            <div class="project-btns">
+                <button type="submit" class="project-delete-btn red-btn" >DELETE</button>
+                <button type="button" class="project-find-btn">FIND</button>
+                <button type="submit" class="project-change-btn">CHANGE</button>
+                <button type="submit" class="project-add-btn">ADD</button>
+            </div>
+        </form>
+        <!-- -----------------------NEWS-------------------- -->
+        <form action="/" class="news-add admin-container-section">
+            <h1 class="section-title">Xəbərlər</h1>
+            <label for="">Xəbərin Başlığı</label>
+            <input type="text" class="news-head">
+            <label for="">Xəbərin Şəkli</label>
+            <input type="file" class="news-picture">
+            <label for="">Xəbərin Buraxılış Vaxtı</label>
+            <input type="text" class="news-date">
+            <label for="">Xəbərin Məğzi</label>
+            <textarea class="news-contex"></textarea>
+            <label for="">Xəbərin Ətraflı Məzmunu</label>
+            <textarea class="news-hide-contex"></textarea>
+            <div class="news-btns">
+                <button type="submit" class="news-add-left ">ADD LEFT</button>
+                <button type="button" class="news-find-btn">FIND</button>
+                <button type="submit" class="news-change-btn">CHANGE</button>
+                <button type="submit" class="news-delete-btn red-btn" >DELETE</button>
+                <button type="submit" class="news-add-right ">ADD RIGHT</button>
+            </div>
+        </form>
+        <!-- -----------------------EVENT---------------------->
+        <form action="/" class="event-add admin-container-section">
+            <h1 class="section-title">Tədbirlər</h1>
+            <label for="">Tədbirin Başlığı</label>
+            <input type="text" class="event-head">
+            <label for="">Tədbir Şəkil</label>
+            <input type="file" class="event-picture">
+            <label for="">Tədbirin Keçirilmə Zamanı</label>
+            <input class="event-time"></input>
+            <label for="">Tədbirin Məzmunu</label>
+            <textarea class="event-contex"></textarea>
+            <div class="event-btns">
+                <button type="submit" class="event-delete-btn red-btn" >DELETE</button>
+                <button type="button" class="event-find-btn">FIND</button>
+                <button type="submit" class="event-change-btn">CHANGE</button>
+                <button type="submit" class="event-add-btn">ADD</button>
+            </div>
+        </form>
+        <!-- -----------------------ABOUT-------------------- -->
+        <form action="/" class="about-add admin-container-section">
+            <h1 class="section-title">Haqqımızda</h1>
+            <label for="">Ad və soyad </label>
+            <input type="text" class="about-name">
+            <label for="">Şəkil</label>
+            <input type="file" class="about-picture">
+            <label for="">Vəzifə</label>
+            <input class="about-job"></input>
+            <label for="">Haqqımızda</label>
+            <textarea class="about-contex"></textarea>
+            <div class="about-btns">
+                <button type="submit" class="about-add-left ">ADD to LEFT</button>
+                <button type="button" class="about-find-btn">FIND</button>
+                <button type="submit" class="about-change-btn">CHANGE</button>
+                <button type="submit" class="about-delete-btn red-btn" >DELETE</button>
+                <button type="submit" class="about-add-right ">ADD to RIGHT</button>
+            </div>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="/admin/admin.js"></script>
+</body>
+</html>
